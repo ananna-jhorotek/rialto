@@ -1,0 +1,2 @@
+POST = {"msisdn":"01714000000","mno_operator":"GRAMEENPHONE","date_start":"2018-01-01 6:5:40","date_end":"2018-01-31 6:5:40","self_user":"false","requested_by":"1","user_designation":"Major","user_appointment":"2IC","placement":"11","reason_crime_type":"ILLEGAL ARMS ","reason_crime_subtype":"Arms Distribution","remarks_reference":"TEST","cdr_voice_sms":"Y","gprs_data":"N","ipdr":"N","info_ussd":"N","recharge":"N","used_imei":"N","info_fnf":"N","info_demographic":"N","nid_pp":"N","registration":"N","info_subs":"N","info_scaned_pp":"N","info_mfs":"N"}
+

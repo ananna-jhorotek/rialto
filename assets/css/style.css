@@ -1,0 +1,29 @@
+body{ font-size:12px !important;}
+
+
+::-webkit-input-placeholder {
+   font-size: 25px;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+      font-size: 25px;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+      font-size: 25px;
+}
+
+/* Overriding styles */
+
+::-webkit-input-placeholder {
+   font-size: 12px!important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+      font-size: 12px!important;
+}
+::-moz-placeholder {  /* Firefox 19+ */
+      font-size: 12px!important;
+}
+
+.form-control{ font-size:12px !important;}

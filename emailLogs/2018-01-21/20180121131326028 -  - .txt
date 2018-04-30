@@ -1,0 +1,2 @@
+POST = {"msisdn":"99999999","mno_operator":"ROBI","date_start":"2018-01-16 18:13:25","date_end":"2018-01-23 18:13:25","self_user":"false","requested_by":"3","user_designation":"CAPTAIN","user_appointment":"COMMANDING OFFICER","placement":"RAB 1","reason_crime_type":"Murder","reason_crime_subtype":"Murder (Multiple)","remarks_reference":"ADS","cdr_voice_sms":"Y","gprs_data":"Y","ipdr":"Y","info_ussd":"Y","recharge":"Y","used_imei":"Y","info_fnf":"Y","info_demographic":"Y","nid_pp":"Y","registration":"Y","info_subs":"Y","info_scaned_pp":"Y","info_mfs":"Y"}
+

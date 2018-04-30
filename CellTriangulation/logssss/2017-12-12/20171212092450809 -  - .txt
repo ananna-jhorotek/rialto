@@ -1,0 +1,6 @@
+requestData = 
+
+GET = {"term":"1"}
+
+POST = []
+

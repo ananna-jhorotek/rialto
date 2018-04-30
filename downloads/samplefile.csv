@@ -1,0 +1,2 @@
+"ContactName","EmailAddress","Address","PostCode","City","RegistrationNumber","TaxId","InvoiceNumber","DocumentType","Allocations","PaymentMethod","PaidBy","InvoiceDate","DueDate","Description","ItemCode","Quantity","UnitPrice","UnitPriceWithoutTax","Discount","TotalWithoutTax","TaxRate","Tax","LineTotal","Currency","PaidAmount","PendingAmount","ChargeDetails"
+"User one","shamim@jhorotek.com",Dhaka,1208,Dhaka,123456,99999999,"INV - 19","invoice","[]","auto","[]","2017-10-12","2017-10-12","Coke Zero",,10,10,10,0,5,"VAT",0,10.00,"BDT",0,0,"[]"
