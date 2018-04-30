@@ -10,6 +10,11 @@
 				Browse<input id="gsmdata" name="gsmdata" type="file" style="display: none;">
 			</label>				
 		</div>
+			<div class="text-center">
+				<a href="<?php echo base_url('Admin/downloadSampleCellsiteExcel');?>">
+					Downlaod Sample File
+				</a>
+			</div>
 	</form>
 
 	<script type="text/javascript">
@@ -19,3 +24,27 @@
 		};
 	</script>
 </div>
+
+<!--div class="content">		
+<form name="fileupload" id="fileupload" action="<?php echo base_url('Admin/downloadSampleCellsiteExcel');?>" method="post" enctype="multipart/form-data">
+		
+		<div class="search_bar text-center">				
+			<label >
+				Upload CELLSITE data file : 
+			</label>
+			<label>
+				<input type="file"  name="file">
+			</label>				
+		</div>
+			<div class="text-center">
+				<a href="<?php echo base_url('Admin/downloadSampleCellsiteExcel');?>">
+					Downlaod Sample File
+				</a>
+			</div>
+			<div class="text-center">
+				<button type="submit" class="btn green"><b>Submit</b></button>
+			</div>
+</form>
+
+
+</div-->

@@ -19,6 +19,14 @@ class auth extends CI_Controller {
     }
 	
     function sign_in() {
+		$this->load->library('form_validation');
+		if($this->form_validation->run('login_page') == FALSE)
+		{
+            $this->load->view('login_page');
+        }
+		else
+		{
+	
         //var_dump($this->input->post());die;        
         $username = $this->input->post('username');
         $password = md5($this->input->post('password'));
@@ -29,8 +37,8 @@ class auth extends CI_Controller {
 //		 die;
 //        
 		if($check_user == NULL){
-            $this->session->set_flashdata('message', 'Wrong username or password !!');
-            $this->index();
+            $this->session->set_flashdata('error_msg', 'Wrong username or password !!');
+            $this->load->view('login_page');
         }  else {
 			$this->session->set_userdata('user_id', $check_user['id']);
 			$this->session->set_userdata('name', $check_user['name']);
@@ -38,12 +46,12 @@ class auth extends CI_Controller {
 			$this->session->set_userdata('wing', $check_user['wing']);
 			$this->session->set_userdata('appointment', $check_user['appointment']);
 			$this->session->set_userdata('battalion_id', $check_user['battalions_id']);                        
-                        $this->session->set_userdata('battalion', $check_user['battalion']);
+			$this->session->set_userdata('battalion', $check_user['battalion']);
 			$this->session->set_userdata('rt_officer', $check_user['rt_officers_id']);
 			$this->session->set_userdata('email', $check_user['email']);
 			$this->session->set_userdata('parent', $check_user['parent']);
 			$this->session->set_userdata('role_type', $check_user['role_name']);
-                        $this->session->set_userdata('role_id', $check_user['roleid']);
+			$this->session->set_userdata('role_id', $check_user['roleid']);
 			
 			if($check_user['parent'] != 0)
 			{
@@ -87,7 +95,7 @@ class auth extends CI_Controller {
                 redirect('dashboards/common_dashboard');              
             }           
         }
-            
+		}    
         
     }  
   

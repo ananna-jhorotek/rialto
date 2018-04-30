@@ -22,6 +22,7 @@
 										<th><?= ucwords(str_replace("_", " ", 'thana'));?></th>
 										<th><?= ucwords(str_replace("_", " ", 'operator'));?></th>
 										<th><?= ucwords(str_replace("_", " ", 'request_for'));?></th>
+										<th><?= ucwords(str_replace("_", " ", 'requested_by'));?></th>
 										<th><?= ucwords(str_replace("_", " ", 'cellid'));?></th>
 										<th><?= ucwords(str_replace("_", " ", 'latitude'));?></th>
 										<th><?= ucwords(str_replace("_", " ", 'longitude'));?></th>
@@ -40,6 +41,7 @@
                                             <td align="center"><?= $request['thana']; ?></td>    
                                             <td align="center"><?= $request['operator']; ?></td>    
                                             <td align="center"><?= $request['request_for']; ?></td>    
+                                            <td align="center"><?= $request['requested_by']; ?></td>    
                                             <td align="center"><?= $request['cellid']; ?></td>    
                                             <td align="center"><?= $request['latitude']; ?></td>    
                                             <td align="center"><?= $request['longitude']; ?></td>    

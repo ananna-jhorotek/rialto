@@ -18,6 +18,18 @@ $config = [
                                         'rules'=>'required|trim'
                                     ]
                 ],
+				'login_page'=>[
+                                    [
+                                        'field'=>'username',
+                                        'label'=>'Email',
+                                        'rules'=>'required|trim|valid_email'
+                                    ],
+                                    [
+                                        'field'=>'password',
+                                        'label'=>'Password',
+                                        'rules'=>'required|trim'
+                                    ]
+                ],
                 'login_form'=>[
                                     [
                                         'field'=>'EmailInput',

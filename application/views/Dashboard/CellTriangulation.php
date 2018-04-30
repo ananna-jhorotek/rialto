@@ -768,7 +768,7 @@ $(function() {
             <div class="box-header">
               <i class="fa fa-envelope"></i>
 
-              <h3 class="box-title">SEARCH HERE</h3>
+              <h3 class="box-title"><?php echo $this->session->userdata('user_id');?></h3>
               <!-- tools box -->
               <div class="pull-right box-tools">
 			  
@@ -806,7 +806,7 @@ $(function() {
 					
 					<div class="form-group">
 						<div id="">
-							<div><input class="form-control" type="text" name="cellid" id="cellid" placeholder="Enter CELLID" disabled></div>
+							<div><input class="form-control" type="text" name="cellid" id="cellid" placeholder="Enter CELLID"></div>
 						</div>								
 					</div>							
 					

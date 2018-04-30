@@ -17,6 +17,16 @@ class Admin extends CI_Controller{
 		$this->load->view('layout/footer');
     }
 	
+	public function downloadSampleCellsiteExcel()
+    {
+		$this->load->helper('download');
+
+		$data = file_get_contents(base_url()."downloads/SampleCellsite.csv");
+		$name = 'SampleCellsite.csv';
+
+		force_download($name, $data);
+	}
+	
     public function crime(){		
 		$this->load->view('layout/header');
 		$this->load->view('admin/crimeupload',array()); 
