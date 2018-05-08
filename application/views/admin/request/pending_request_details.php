@@ -95,9 +95,11 @@
                                                                 ->join('designations', 'designations.designations_id=users.designations_id')
                                                                 ->join('tbl_crimeinfo', 'tbl_crimeinfo.id=tbl_req_mno_msisdn.reason_crime_type')
                                                                 ->where('request_status', 'New')
-                                                                ->where('date_requested <', date('Y-m-d'))
-                                                                ->where('request_type', 'general')
-                                                                ->where('tbl_req_mno_msisdn.battalions_id', $this->session->userdata('battalion_id'))
+                                                                ->where('date_requested <', date('Y-m-d'))                                                             
+                                                                ->where('tbl_req_mno_msisdn.general_type', 1)      
+                                                                ->where('tbl_req_mno_msisdn.special', 0) 
+                                                                ->where('tbl_req_mno_msisdn.is_approved', 0)
+                                                                // ->where('tbl_req_mno_msisdn.battalions_id', $this->session->userdata('battalion_id'))
                                                                 ->get('tbl_req_mno_msisdn')                                            
                                                                 ->result_array();?>
                                       <?php $i=1; foreach($default_datas as $default_data):?>                                           

@@ -41,4 +41,17 @@ class Admin_model extends CI_Model{
 			return $query->row();
 		}
 	}
+		
+	public function getCellsite(){
+	return $query = $this->db->get('tbl_cellsite_backup');
+		/*
+		Here you should note i am returning 
+		the query object instead of 
+		$query->result() or $query->result_array()
+		*/
+	}  
+	
+	public function truncateCellsite(){
+	$this->db->truncate('tbl_cellsite');
+	}  
 }

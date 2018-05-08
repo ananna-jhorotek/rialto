@@ -14,6 +14,14 @@ class Reports_model extends CI_Model{
         return $this->db->get('tbl_req_mno_msisdn')->result_array();;
 
     }
+	
+	public function getdDetailedReportData(){
+
+        $this->db->select('*')
+		->join('users','users.id=tbl_req_mno_msisdn.requested_by','left');
+        return $this->db->get('tbl_req_mno_msisdn')->result_array();
+
+    }
 
 	public function getActivitesLogData(){
 
@@ -27,7 +35,7 @@ class Reports_model extends CI_Model{
         $this->db->select('*, users.name as requested_by')
 		->join('users','tbl_requestlogs.user_id=users.id','left')
 		->where('user_id',$user_id);
-        return $this->db->get('tbl_requestlogs')->result_array();;
+        return $this->db->get('tbl_requestlogs')->result_array();
 
     }  
 	

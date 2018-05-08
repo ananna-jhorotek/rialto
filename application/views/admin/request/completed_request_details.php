@@ -99,7 +99,7 @@
                                                                 ->join('designations', 'designations.designations_id=t2.designations_id')
                                                                 ->join('tbl_crimeinfo', 'tbl_crimeinfo.id=tbl_req_mno_msisdn.reason_crime_type')
                                                                 ->where('request_status', 'Completed')                                                               
-                                                                ->where('tbl_req_mno_msisdn.battalions_id', $this->session->userdata('battalion_id'))
+                                                                // ->where('tbl_req_mno_msisdn.battalions_id', $this->session->userdata('battalion_id'))
                                                                 ->get('tbl_req_mno_msisdn')                                            
                                                                 ->result_array();?>
                                       <?php $i=1; foreach($default_datas as $default_data):?>

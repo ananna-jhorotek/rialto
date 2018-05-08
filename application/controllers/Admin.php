@@ -27,6 +27,37 @@ class Admin extends CI_Controller{
 		force_download($name, $data);
 	}
 	
+	public function backupCellsiteExcel()
+    {		
+		$this->load->dbutil();
+		$this->load->helper('file');
+		$this->load->helper('download');
+		
+		$report = $this->Admin_model->getCellsite();
+		$delimiter = ",";
+		$newline = "\r\n";
+		
+		/*  pass it to db utility function  */
+		$new_report = $this->dbutil->csv_from_result($report, $delimiter, $newline);
+		
+		if ( ! write_file(FCPATH.'downloads/cellsite.csv',$new_report))
+		{
+			$this->session->set_flashdata('error_msg', 'File Upload failed');
+			$this->load->view('layout/header');
+			$this->load->view('Dashboard/Admin_upload',array()); 
+			$this->load->view('layout/footer');
+		}
+		else
+		{
+			$this->session->set_flashdata('success_msg', 'File has been Uploaded !!');
+			$this->load->view('layout/header');
+			$this->load->view('Dashboard/Admin_upload',array()); 
+			$this->load->view('layout/footer');
+		}
+
+		/*  Done    */
+	}
+	
     public function crime(){		
 		$this->load->view('layout/header');
 		$this->load->view('admin/crimeupload',array()); 
@@ -293,6 +324,29 @@ class Admin extends CI_Controller{
 		
 		$this->load->library('MyExcel');
 
+		$this->load->dbutil();
+		$this->load->helper('file');
+		$this->load->helper('download');
+		
+		$report = $this->Admin_model->getCellsite();
+		$delimiter = ",";
+		$newline = "\r\n";
+		
+		/*  pass it to db utility function  */
+		$new_report = $this->dbutil->csv_from_result($report, $delimiter, $newline);
+		
+		if ( ! write_file(FCPATH.'downloads/cellsite.csv',$new_report))
+		{
+			$this->session->set_flashdata('error_msg', 'File Upload failed');
+			$this->load->view('layout/header');
+			$this->load->view('Dashboard/Admin_upload',array()); 
+			$this->load->view('layout/footer');
+		}
+		else
+		{
+			$this->session->set_flashdata('success_msg', 'File has been Uploaded !!');
+			$this->Admin_model->truncateCellsite();
+		}
 		
 		$excelFile = $_FILES['gsmdata']['tmp_name'];
 

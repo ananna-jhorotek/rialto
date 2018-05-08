@@ -176,6 +176,20 @@ class Reports extends CI_Controller{
 		// $retrivedData = $this->Reports_model->getData();
     }
 	
+	public function detailedReport(){
+		
+		// $retrivedData = $this->Reports_model->getData();
+		
+		
+	
+        $data['user_list'] = $this->Reports_model->getdDetailedReportData();
+        $data['main_content'] = 'Dashboard/detailedReport';
+        $this->load->view('includes/template', $data);
+		
+		// $this->load->view('layout/header');
+		// $this->load->view('Dashboard/requestLogs',array()); 
+		// $this->load->view('layout/footer');				
+    }
 	
     public function requestLogs(){
 		

@@ -89,10 +89,10 @@
                                                                     ->join('battalions', 'battalions.battalions_id=users.battalions_id')
                                                                     ->join('designations', 'designations.designations_id=users.designations_id')
                                                                     ->join('tbl_crimeinfo', 'tbl_crimeinfo.id=tbl_req_mno_msisdn.reason_crime_type')
-                                                                    ->where('tbl_req_mno_msisdn.request_status', 'new')
+                                                                    ->where('tbl_req_mno_msisdn.request_status', 'New')
                                                                     ->where('tbl_req_mno_msisdn.date_requested', date('Y-m-d'))
                                                                     ->where('tbl_req_mno_msisdn.general_type', 1)
-                                                                    ->where('tbl_req_mno_msisdn.battalions_id', $this->session->userdata('battalion_id'))
+                                                                    // ->where('tbl_req_mno_msisdn.battalions_id', $this->session->userdata('battalion_id'))
                                                                     ->get('tbl_req_mno_msisdn')
                                                                     ->result_array();?>  
                                         
@@ -101,11 +101,11 @@
                                                                     ->join('battalions', 'battalions.battalions_id=users.battalions_id')
                                                                     ->join('designations', 'designations.designations_id=users.designations_id')
                                                                     ->join('tbl_crimeinfo', 'tbl_crimeinfo.id=tbl_req_mno_msisdn.reason_crime_type')
-                                                                    ->where('tbl_req_mno_msisdn.request_status', 'new')
+                                                                    ->where('tbl_req_mno_msisdn.request_status', 'New')
                                                                     ->where('tbl_req_mno_msisdn.date_requested', date('Y-m-d'))
                                                                     ->where('tbl_req_mno_msisdn.special', 1)
                                                                     ->where('tbl_req_mno_msisdn.is_approved', 1)
-                                                                    ->where('tbl_req_mno_msisdn.battalions_id', $this->session->userdata('battalion_id'))
+                                                                    // ->where('tbl_req_mno_msisdn.battalions_id', $this->session->userdata('battalion_id'))
                                                                     ->get('tbl_req_mno_msisdn')
                                                                     ->result_array();?> 
                                         <?php $default_datas = array_merge($default_data1, $default_data2);?>

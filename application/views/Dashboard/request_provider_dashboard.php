@@ -22,7 +22,7 @@
                                                     ->where('date_requested', date('Y-m-d'))                                                    
                                                     ->where('general_type', 1)
                                                     ->where('is_approved', 0)
-                                                    ->where('battalions_id', $this->session->userdata('battalion_id'))
+                                                    // ->where('battalions_id', $this->session->userdata('battalion_id'))
                                                     ->get('tbl_req_mno_msisdn')
                                                     ->num_rows(); ?>                  
                   <?php $special_request_number = $this->db
@@ -30,7 +30,7 @@
                                                     ->where('date_requested', date('Y-m-d'))                                                    
                                                     ->where('special', 1)
                                                     ->where('is_approved', 1)
-                                                    ->where('battalions_id', $this->session->userdata('battalion_id'))
+                                                    // ->where('battalions_id', $this->session->userdata('battalion_id'))
                                                     ->get('tbl_req_mno_msisdn')
                                                     ->num_rows();?>
                   <?php $total_new = $general_request_number+$special_request_number; ?>                  
@@ -52,7 +52,7 @@
                                                         ->where('request_status', 'new')
                                                         ->where('date_requested <', date('Y-m-d'))
                                                         ->where('general_type', 1)
-                                                        ->where('battalions_id', $this->session->userdata('battalion_id'))
+                                                        // ->where('battalions_id', $this->session->userdata('battalion_id'))
                                                         ->get('tbl_req_mno_msisdn')
                                                         ->num_rows(); ?>                  
                 <?php $special_pending_request_number = $this->db
@@ -60,7 +60,7 @@
                                                     ->where('date_requested <', date('Y-m-d'))                                                    
                                                     ->where('special', 1)
                                                     ->where('is_approved', 1)
-                                                    ->where('battalions_id', $this->session->userdata('battalion_id'))
+                                                    // ->where('battalions_id', $this->session->userdata('battalion_id'))
                                                     ->get('tbl_req_mno_msisdn')
                                                     ->num_rows();?>
                   <?php $total_pending = $pending_request_number+$special_pending_request_number; ?>               

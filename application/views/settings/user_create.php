@@ -1,4 +1,29 @@
+<style>
+    .left-inner-addon {
+    position: relative;
+}
+.left-inner-addon input {
+    padding-left: 28px;    
+}
+.left-inner-addon span {
+    position: absolute;
+    padding: 8px 5px;
+    pointer-events: none;
+}
 
+.right-inner-addon {
+    position: relative;
+}
+.right-inner-addon input {
+    padding-right: 30px;    
+}
+.right-inner-addon span {
+    position: absolute;
+    right: 0px;
+    padding: 7px 12px;
+    pointer-events: none;
+}
+</style>
 <div class="content-wrapper">
     <section class="content-header">
         <h1>Add User information<a href="<?= site_url('settings/user_list') ?>" class="btn btn-success add-btn pull-right">User List</a></h1>      
@@ -25,8 +50,11 @@
                                                 </div>
                                                 <div class="col-sm-4 col-md-4 col-lg-4">      
                                                     <label>Phone Number :</label>
-                                                    <input type="number" name="phone" class="form-control" required data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask="">
-                                                </div>
+													<div class="left-inner-addon">
+														<span style="font-weight: bold; font-size: 12px;">+88</span>
+														<input type="number" name="phone" class="form-control" required data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask="">
+													</div>
+												</div>
                                                 <div class="col-sm-4 col-md-4 col-lg-4" id="userNameDiv">      
                                                     <label>E-Mail :</label>
                                                     <input type="email" placeholder="E-Mail"  required  name="username"  id="email" class="form-control form-control-success" >
