@@ -266,11 +266,11 @@
 						  
                     marker = L.marker([json[i].latitude, json[i].longitude], {icon: myIcon}).addTo(map);
 
-                    if(json[i].operator == 'bl')
+                    if(json[i].operator == 'BVANGLALINK')
                     {
                         color = bl[ parseInt(json[i].antenna_direction / 60)];
                     }
-                    else if(json[i].operator == 'gp')
+                    else if(json[i].operator == 'GRAMEENPHONE')
                     {
                         color = gp[ parseInt(json[i].antenna_direction / 60)];
                     }
@@ -286,8 +286,10 @@
                         fillColor: color,
 						
 
-						startAngle: parseFloat(json[i].antenna_direction),
-						stopAngle: parseFloat(json[i].antenna_direction) + 50
+						// startAngle: parseFloat(json[i].antenna_direction),
+						// stopAngle: parseFloat(json[i].antenna_direction) + 50
+						startAngle: parseFloat(json[i].antenna_direction) - 60,
+						stopAngle:  parseFloat(json[i].antenna_direction) + 60
                     }).addTo(map).on('click',mypopup).bindPopup("<div>BTS Name : " + json[i].site_name + "	<br/>Cell_name : " + json[i].cell_name + "	<br/>Cell ID : " + json[i].cell_id + "<br/>Longitude : " + json[i].longitude + "<br/>antenna_direction : " + json[i].antenna_direction + "	<br/></div>",{maxWidth: "300"});
 					
 					

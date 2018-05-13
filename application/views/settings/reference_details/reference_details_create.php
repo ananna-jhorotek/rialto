@@ -42,7 +42,16 @@
                                         <div class="form-group">
                                             <div class="col-sm-4 col-md-4 col-lg-4">      
                                                 <label>Reference Type : </label>
-                                                <input type="text" name="reference_type"  required class="form-control">
+												 <select class="form-control custom-select" name="reference_type" id="reference_type" required>
+													<option value="">Please Select</option>
+													<?php
+													$ref_types = $this->db
+																	->get('reference_details')->result_array();
+													foreach ($ref_types as $ref_type):
+														?>                                                
+														<option value="<?= $ref_type['reference_type']; ?>"><?= $ref_type['reference_type']; ?></option>
+													<?php endforeach; ?> 
+												</select>
                                             </div>
                                             <div class="col-sm-4 col-md-4 col-lg-4">      
                                                 <label>Owner Reference :</label>

@@ -390,13 +390,13 @@ $(function() {
 						  iconSize: null});
                     marker = L.marker([json[i].latitude, json[i].longitude], {icon: myIcon}).addTo(map);
 
-                    if(json[i].operator == 'bl')
+                    if(json[i].operator == 'BVANGLALINK')
                     {
                         //console.log('inside');
                         //console.log( parseInt(json[i].antenna_direction / 60));
                         color = bl[ parseInt(json[i].antenna_direction / 60)];
                     }
-                    else if(json[i].operator == 'gp')
+                    else if(json[i].operator == 'GRAMEENPHONE')
                     {
                         color = gp[ parseInt(json[i].antenna_direction / 60)];
                     }
@@ -411,9 +411,12 @@ $(function() {
                         fillColor: color,
 						
 
-						startAngle: parseFloat(json[i].antenna_direction),
-						stopAngle: parseFloat(json[i].antenna_direction) + 50
-                    }).addTo(map).on('click',mypopup).bindPopup("<div>BTS Name : " + json[i].site_name + "	<br/>Cell_name : " + json[i].cell_name + "	<br/>Cell ID : " + json[i].cell_id + "<br/>Longitude : " + json[i].longitude + "	<br/>Site Address : " + json[i].site_address + "	<br/>Operator : " + json[i].operator + "</div>",{maxWidth: "300"});
+						// startAngle: parseFloat(json[i].antenna_direction),
+						// stopAngle: parseFloat(json[i].antenna_direction) + 50
+						
+						startAngle: parseFloat(json[i].antenna_direction) - 60,
+						stopAngle:  parseFloat(json[i].antenna_direction) + 60
+                    }).addTo(map).on('click',mypopup).bindPopup("<div>BTS Name : " + json[i].site_name+ "	<br/>Site Address : " + json[i].site_address + "	<br/>Operator : " + json[i].operator + "	<br/>LAC ID : " + json[i].lac_id + "	<br/>Cell ID : " + json[i].cell_id + "<br/>Cell Direction : " + json[i].antenna_direction  + "<br/>BTS Type : " + json[i].bts_type  +"</div>",{maxWidth: "300"});
 					
 					
 					//console.log('--------------------------------');
@@ -533,12 +536,14 @@ $(function() {
 		$('#submitThana').on('click',function () {
 			
 			
-			// console.log('search icon clicked');
+			console.log('search icon clicked');
 			var operator = document.getElementById('operator').value;
 			var longitude = document.getElementById('longitude').value;
 			var latitude = document.getElementById('latitude').value;
 			var area_range = document.getElementById('area_range').value;
 			var thana = document.getElementById('thana').value;
+			
+	
 			
 			if(thana == '')
 			{
@@ -616,7 +621,15 @@ $(function() {
 				//console.log(myData);
 				var markerlist = new Array();
 				
-					
+				var circle = L.circle([latitude, longitude], {
+				color: '',
+				fillColor: '#20841D',
+				fillOpacity: 0.5,
+				radius: area_range
+				}).addTo(map);
+				map.fitBounds([[latitude,longitude]],{maxZoom : 16});
+				//map.removeLayer(circle);
+				
 					
                 for(var i=0;i<json.length;i++)
                 {
@@ -630,13 +643,13 @@ $(function() {
 						  iconSize: null});
                     marker = L.marker([json[i].latitude, json[i].longitude], {icon: myIcon}).addTo(map);
 
-                    if(json[i].operator == 'bl')
+                    if(json[i].operator == 'BVANGLALINK')
                     {
                         //console.log('inside');
                         //console.log( parseInt(json[i].antenna_direction / 60));
                         color = bl[ parseInt(json[i].antenna_direction / 60)];
                     }
-                    else if(json[i].operator == 'gp')
+                    else if(json[i].operator == 'GRAMEENPHONE')
                     {
                         color = gp[ parseInt(json[i].antenna_direction / 60)];
                     }
@@ -646,13 +659,7 @@ $(function() {
                     }
                     console.log(color);
 					
-					var circle = L.circle([latitude, longitude], {
-							color: '',
-							fillColor: '#20841D',
-							fillOpacity: 0.3,
-							radius: area_range
-							}).addTo(map);
-							map.fitBounds([[latitude,longitude]],{maxZoom : 16});
+
 					
                     show = L.semiCircle([json[i].latitude, json[i].longitude], {
                         radius: json[i].cell_beamrange,
@@ -660,9 +667,9 @@ $(function() {
                         fillColor: color,
 						
 
-						startAngle: parseFloat(json[i].antenna_direction),
-						stopAngle: parseFloat(json[i].antenna_direction) + 50
-                    }).addTo(map).on('click',mypopup).bindPopup("<div>BTS Name : " + json[i].site_name + "	<br/>Cell_name : " + json[i].cell_name + "	<br/>Cell ID : " + json[i].cell_id + "<br/>Longitude : " + json[i].longitude + "	<br/>Site Address : " + json[i].site_address + "	<br/>Operator : " + json[i].operator + "</div>",{maxWidth: "300"});
+						startAngle: parseFloat(json[i].antenna_direction) - 60,
+						stopAngle:  parseFloat(json[i].antenna_direction) + 60
+                    }).addTo(map).on('click',mypopup).bindPopup("<div>BTS Name : " + json[i].site_name+ "	<br/>Site Address : " + json[i].site_address + "	<br/>Operator : " + json[i].operator + "	<br/>LAC ID : " + json[i].lac_id + "	<br/>Cell ID : " + json[i].cell_id + "<br/>Cell Direction : " + json[i].antenna_direction  + "<br/>BTS Type : " + json[i].bts_type  +"</div>",{maxWidth: "300"});
 					
 					
 					
@@ -791,9 +798,9 @@ $(function() {
 					<span for="subject">
 						Operator</span>
 					<select id="operator" name="operator" class="form-control" required="required">
-						<option value="" selected="">All Operator:</option>
+						<option value="" selected="" >All Operator:</option>
 						<option value="BANGLALINK">BANGLALINK</option>
-						<option value="ROBI">ROBI</option>
+						<option value="ROBI" >ROBI</option>
 						<option value="GRAMEENPHONE">GRAMEENPHONE</option>
 						<option value="AIRTEL">AIRTEL</option>
 						<option value="TELETALK">TELETALK</option>
@@ -838,7 +845,7 @@ $(function() {
 					</div>
 					<br/>
 					<div id="InputsWrapper">								
-						<select id="area_range" name="area_range" class="form-control" required="required" disabled>
+						<select id="area_range" name="area_range" class="form-control" required="required">
 							<option value="" selected="">Choose One:</option>
 							<option value="3000">3KM</option>
 							<option value="5000">5KM</option>

@@ -32,7 +32,7 @@ class Reports_model extends CI_Model{
 
 	public function getRequestlogsData($user_id){
 
-        $this->db->select('*, users.name as requested_by')
+        $this->db->select('tbl_requestlogs.*, users.name as requested_by')
 		->join('users','tbl_requestlogs.user_id=users.id','left')
 		->where('user_id',$user_id);
         return $this->db->get('tbl_requestlogs')->result_array();

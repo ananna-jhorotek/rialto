@@ -57,6 +57,8 @@
     <!--<script src="<?= base_url('assets/js/bootstrap-datepicker.js');?>"></script>-->
     <script src="<?= base_url('assets/js/jquery.dataTables.min.js');?>"></script>
     <script src="<?= base_url('assets/js/dataTables.bootstrap4.min.js');?>"></script>
+    <script src="<?= base_url('assets/js/jquery-1.12.4.js');?>"></script>
+    <script src="<?= base_url('assets/js/jquery.dataTables.min.js');?>"></script>
     <script type="text/javascript" src="<?= base_url('assets/js/prettify.js');?>"></script>
    
     

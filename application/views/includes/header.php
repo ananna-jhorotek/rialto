@@ -28,6 +28,7 @@
         <link rel="stylesheet" href="<?= base_url('assets/css/blue.css');?>">         
         <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap-datetimepicker.css');?>">
         <link rel="stylesheet" href="<?= base_url('assets/css/dataTables.bootstrap.min.css');?>">    
+        <link rel="stylesheet" href="<?= base_url('assets/css/jquery.dataTables.min.css');?>">    
        
         <link rel="stylesheet" href="<?php echo base_url('assets/css/jquery-ui.css'); ?>">
 		

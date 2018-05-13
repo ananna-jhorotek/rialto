@@ -311,7 +311,8 @@ class Reports extends CI_Controller{
         }else{
             $self_user = '';
         }
-        $get_special_number = $this->db->where('contact_no',$this->input->post('msisdn'))->get('tbl_internal_hotlist')->row_array(); 
+        // $get_special_number = $this->db->where('contact_no',$this->input->post('msisdn'))->get('tbl_internal_hotlist')->row_array(); 
+        $get_special_number = $this->db->where('reference_number',$this->input->post('msisdn'))->get('reference_details')->row_array(); 
         
         if($get_special_number['contact_no'] != NULL){
             $general_request = '0';

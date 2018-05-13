@@ -15,7 +15,6 @@
                                 <thead>
                                     <tr>									
 										<th><?= ucwords(str_replace("_", " ", 'User'));?></th>
-										<th><?= ucwords(str_replace("_", " ", 'source_url'));?></th>
 										<th><?= ucwords(str_replace("_", " ", 'laccellid'));?></th>
 										<th><?= ucwords(str_replace("_", " ", 'bts'));?></th>
 										<th><?= ucwords(str_replace("_", " ", 'lac'));?></th>
@@ -27,14 +26,13 @@
 										<th><?= ucwords(str_replace("_", " ", 'latitude'));?></th>
 										<th><?= ucwords(str_replace("_", " ", 'longitude'));?></th>
 										<th><?= ucwords(str_replace("_", " ", 'area_range'));?></th>
-										<th><?= ucwords(str_replace("_", " ", 'createat'));?></th>
+										<th><?= ucwords(str_replace("_", " ", 'created_date'));?></th>
                                     </tr>
                                 </thead>                                
                                 <tbody>
                                     <?php $i = 1; foreach ($user_list as $request): ?>
                                         <tr>
-                                            <td align="center"><?= $request['user_id']; ?></td>                                       
-                                            <td align="center"><?= $request['source_url']; ?></td>    
+                                            <td align="center"><?= $request['user_id']; ?></td>       
                                             <td align="center"><?= $request['laccellid']; ?></td>    
                                             <td align="center"><?= $request['bts']; ?></td>    
                                             <td align="center"><?= $request['lac']; ?></td>    

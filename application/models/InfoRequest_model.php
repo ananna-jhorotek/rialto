@@ -46,8 +46,10 @@ class InfoRequest_model extends CI_Model {
 		
 		
 		$this->db->select('*');
-		$this->db->where('tbl_internal_hotlist.contact_no',$msisdn);
-        $query = $this->db->get('tbl_internal_hotlist');
+		// $this->db->where('tbl_internal_hotlist.contact_no',$msisdn);
+        // $query = $this->db->get('tbl_internal_hotlist');
+		$this->db->where('reference_details.reference_number',$msisdn);
+        $query = $this->db->get('reference_details');
 
         if($query->num_rows() > 0){
             return $query->row_array();
