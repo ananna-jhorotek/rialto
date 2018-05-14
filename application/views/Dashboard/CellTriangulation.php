@@ -255,7 +255,7 @@ $(function() {
 <!--- init for map -->
 <script>
 	var map;
-	var show = L.marker();
+	var show = null;
 	var myIcon = L.divIcon({className: 'my-div-icon',
 						  html:'<img src="<? echo site_url('assets/images/bts.png');?>" style=" margin-top: -15px; margin-left: -25px; " class="icon-enviroment anticon location" type="enviroment">',
 						 
@@ -268,7 +268,7 @@ $(function() {
 
 		// var osmUrl='http://54.202.51.247:80/hot/{z}/{x}/{y}.png';
 		var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-		var osmAttrib='Nafis © <a href="http://dingi.org">Dingi Map</a> contributors';
+		var osmAttrib='DingiMap © <a href="http://dingi.org">Dingi Map</a> contributors';
 		var osm = new L.TileLayer(osmUrl, {minZoom: 1, maxZoom: 20, attribution: osmAttrib});
 
 		// start the map in South-East England
@@ -288,6 +288,8 @@ $(function() {
     var gp = ['#0063af','#1A73B7','#3382BF','#4C92C7','#66A1CF','#80B1D7'];
     var bl = ['#f27025', '#F37E3B', '#F58D51', '#F69B66', '#F7A97C', '#F8B892'];
     var robi = ['#fe0002', '#FE1A1B', '#FE3335', '#FE4C4E', '#FE6667', '#FE8080'];
+	var marker_array = new Array();
+	var bts_array = [];
     $(document).ready(function(){
 		
 		
@@ -308,6 +310,15 @@ $(function() {
 	
 
     $('#submitOperator').on('click',function (){
+		console.log("marker aRRAY");
+		console.log(marker_array.length);
+		for(var i = 0; i < marker_array.length; i++){
+				map.removeLayer(marker_array[i]);
+			}
+		for(var i = 0; i < bts_array.length; i++){
+				map.removeLayer(bts_array[i]);
+			}
+			
         var operator = document.getElementById('operator').value;
         var cellid = document.getElementById('input').value;
 		var cellid = cellid.trim();
@@ -389,7 +400,7 @@ $(function() {
 						 
 						  iconSize: null});
                     marker = L.marker([json[i].latitude, json[i].longitude], {icon: myIcon}).addTo(map);
-
+					bts_array.push(marker);
                     if(json[i].operator == 'BVANGLALINK')
                     {
                         //console.log('inside');
@@ -417,7 +428,7 @@ $(function() {
 						startAngle: parseFloat(json[i].antenna_direction) - 60,
 						stopAngle:  parseFloat(json[i].antenna_direction) + 60
                     }).addTo(map).on('click',mypopup).bindPopup("<div>BTS Name : " + json[i].site_name+ "	<br/>Site Address : " + json[i].site_address + "	<br/>Operator : " + json[i].operator + "	<br/>LAC ID : " + json[i].lac_id + "	<br/>Cell ID : " + json[i].cell_id + "<br/>Cell Direction : " + json[i].antenna_direction  + "<br/>BTS Type : " + json[i].bts_type  +"</div>",{maxWidth: "300"});
-					
+					marker_array.push(show);
 					
 					//console.log('--------------------------------');
 					//console.log(json[i].antenna_direction - 5);
@@ -528,13 +539,16 @@ $(function() {
 <script>
 
     var json;
+	var circle = null;
     var gp = ['#0063af','#1A73B7','#3382BF','#4C92C7','#66A1CF','#80B1D7'];
     var bl = ['#f27025', '#F37E3B', '#F58D51', '#F69B66', '#F7A97C', '#F8B892'];
     var robi = ['#fe0002', '#FE1A1B', '#FE3335', '#FE4C4E', '#FE6667', '#FE8080'];
     $(document).ready(function(){
 		
 		$('#submitThana').on('click',function () {
-			
+			if(circle != null){
+				map.removeLayer(circle);
+			}
 			
 			console.log('search icon clicked');
 			var operator = document.getElementById('operator').value;
@@ -621,7 +635,7 @@ $(function() {
 				//console.log(myData);
 				var markerlist = new Array();
 				
-				var circle = L.circle([latitude, longitude], {
+				circle = L.circle([latitude, longitude], {
 				color: '',
 				fillColor: '#20841D',
 				fillOpacity: 0.5,

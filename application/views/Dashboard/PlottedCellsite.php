@@ -34,6 +34,9 @@
     var gp = ['#0063af','#9999ff','#8080ff','#4d4dff','#1a1aff','#0000e6'];
     var bl = ['#f27025', '#F37E3B', '#F58D51', '#F69B66', '#F7A97C', '#F8B892'];
     var robi = ['#fe0002', '#FE1A1B', '#FE3335', '#FE4C4E', '#FE6667', '#FE8080'];
+	var marker_array = new Array();
+	var bts_array = [];
+	
     $(document).ready(function(){
 		
 		$(function() {
@@ -180,6 +183,12 @@
 
 
     $('#mySubmit').on('click',function(){		
+		for(var i = 0; i < marker_array.length; i++){
+				map.removeLayer(marker_array[i]);
+			}
+		for(var i = 0; i < bts_array.length; i++){
+				map.removeLayer(bts_array[i]);
+			}
 		
         //console.log('search icon clicked');
         var thana = document.getElementById('thana').value;
@@ -265,7 +274,8 @@
 						  html:'<div  style="font-size: 5px;" align="center"><img width="35" height="35" src="<? echo site_url('assets/images/newbtsicon.png');?>" style=" margin-top: -15px; margin-left: -25px; " class="icon-enviroment anticon location" type="enviroment"><p>'+json[i].site_name+'</p></div>',iconSize: null});
 						  
                     marker = L.marker([json[i].latitude, json[i].longitude], {icon: myIcon}).addTo(map);
-
+					bts_array.push(marker);
+					
                     if(json[i].operator == 'BVANGLALINK')
                     {
                         color = bl[ parseInt(json[i].antenna_direction / 60)];
@@ -290,8 +300,8 @@
 						// stopAngle: parseFloat(json[i].antenna_direction) + 50
 						startAngle: parseFloat(json[i].antenna_direction) - 60,
 						stopAngle:  parseFloat(json[i].antenna_direction) + 60
-                    }).addTo(map).on('click',mypopup).bindPopup("<div>BTS Name : " + json[i].site_name + "	<br/>Cell_name : " + json[i].cell_name + "	<br/>Cell ID : " + json[i].cell_id + "<br/>Longitude : " + json[i].longitude + "<br/>antenna_direction : " + json[i].antenna_direction + "	<br/></div>",{maxWidth: "300"});
-					
+                    }).addTo(map).on('click',mypopup).bindPopup("<div>BTS Name : " + json[i].site_name+ "	<br/>Site Address : " + json[i].site_address + "	<br/>Operator : " + json[i].operator + "	<br/>LAC ID : " + json[i].lac_id + "	<br/>Cell ID : " + json[i].cell_id + "<br/>Cell Direction : " + json[i].antenna_direction  + "<br/>BTS Type : " + json[i].bts_type  +"</div>",{maxWidth: "300"});
+					marker_array.push(show);
 					
 					//console.log('--------------------------------');
 					//console.log(json[i].antenna_direction - 5);

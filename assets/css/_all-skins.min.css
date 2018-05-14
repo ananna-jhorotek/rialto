@@ -3,3 +3,10 @@
 .error{
 	color:#F00 !important;
 }
+
+.nav-fixed {
+    background-color: #eeeeee;
+    position: fixed !important;
+    top: 0 !important;
+	width: 100% !important;
+}
