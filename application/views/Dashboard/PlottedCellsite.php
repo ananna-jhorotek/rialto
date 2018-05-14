@@ -276,7 +276,7 @@
                     marker = L.marker([json[i].latitude, json[i].longitude], {icon: myIcon}).addTo(map);
 					bts_array.push(marker);
 					
-                    if(json[i].operator == 'BVANGLALINK')
+                    if(json[i].operator == 'BANGLALINK')
                     {
                         color = bl[ parseInt(json[i].antenna_direction / 60)];
                     }

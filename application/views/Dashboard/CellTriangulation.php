@@ -401,7 +401,7 @@ $(function() {
 						  iconSize: null});
                     marker = L.marker([json[i].latitude, json[i].longitude], {icon: myIcon}).addTo(map);
 					bts_array.push(marker);
-                    if(json[i].operator == 'BVANGLALINK')
+                    if(json[i].operator == 'BANGLALINK')
                     {
                         //console.log('inside');
                         //console.log( parseInt(json[i].antenna_direction / 60));
@@ -657,7 +657,7 @@ $(function() {
 						  iconSize: null});
                     marker = L.marker([json[i].latitude, json[i].longitude], {icon: myIcon}).addTo(map);
 
-                    if(json[i].operator == 'BVANGLALINK')
+                    if(json[i].operator == 'BANGLALINK')
                     {
                         //console.log('inside');
                         //console.log( parseInt(json[i].antenna_direction / 60));
