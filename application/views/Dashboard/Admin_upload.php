@@ -1,6 +1,25 @@
+ <?php
+
+if($this->session->flashdata('success_msg')){
+    ?>
+    <div class="alert alert-success">
+        <?php echo $this->session->flashdata('success_msg');?>
+    </div>
+    <?php
+}
+?>
+<?php
+if($this->session->flashdata('error_msg')){
+    ?>
+    <div class="alert alert-danger">
+        <?php echo $this->session->flashdata('error_msg');?>
+    </div>
+    <?php
+}
+?>
 <div class="content">		
 
-	<form name="fileupload" id="fileupload" action="<?php echo base_url('Admin/upload');?>" method="post" enctype="multipart/form-data">
+	<form name="fileupload" id="fileupload" action="<?php echo base_url('Admin/bulk_upload');?>" method="post" enctype="multipart/form-data">
 		
 		<div class="search_bar text-center">				
 			<label >
@@ -38,25 +57,7 @@
 		};
 	</script>
 </div>
- <?php
 
-if($this->session->flashdata('success_msg')){
-    ?>
-    <div class="alert alert-success">
-        <?php echo $this->session->flashdata('success_msg');?>
-    </div>
-    <?php
-}
-?>
-<?php
-if($this->session->flashdata('error_msg')){
-    ?>
-    <div class="alert alert-danger">
-        <?php echo $this->session->flashdata('error_msg');?>
-    </div>
-    <?php
-}
-?>
 
 <!--div class="content">		
 <form name="fileupload" id="fileupload" action="<?php echo base_url('Admin/upload');?>" method="post" enctype="multipart/form-data">

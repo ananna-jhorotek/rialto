@@ -4,6 +4,12 @@
   // console.log(data);
 </script>
 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCM17SPnOWcBur5ekpJ9rvFumehGZj8gLE" async defer></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+ 
+    <script src='https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js'></script>
+
 <script>
 	var map;
 	var show = L.marker();
@@ -11,18 +17,96 @@
 
 	function init(){
 
-		map = new L.Map('map');
-		// create the tile layer with correct attribution
+		// map = new L.Map('map');
+		// // create the tile layer with correct attribution
 
-		var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-		/*  var osmUrl='http://54.202.51.247:80/hot/{z}/{x}/{y}.png';*/
-		var osmAttrib='Nafis © <a href="http://dingi.org">Dingi Map</a> contributors';
-		var osm = new L.TileLayer(osmUrl, {minZoom: 1, maxZoom: 20, attribution: osmAttrib});
+		// var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+		// /*  var osmUrl='http://54.202.51.247:80/hot/{z}/{x}/{y}.png';*/
+		// var osmAttrib='Nafis © <a href="http://dingi.org">Dingi Map</a> contributors';
+		// var osm = new L.TileLayer(osmUrl, {minZoom: 1, maxZoom: 20, attribution: osmAttrib});
 
-		// start the map in South-East England
-		map.setView(new L.LatLng(23.7526, 90.3792),14);
-		map.addLayer(osm);
+		// // start the map in South-East England
+		// map.setView(new L.LatLng(23.7526, 90.3792),14);
+		// map.addLayer(osm);
 		
+				var mapopts =  {
+//      zoomSnap: 0.1
+		};
+
+		map = L.map('map', mapopts).setView([0,0],0);
+
+		var roadMutant = L.gridLayer.googleMutant({
+			maxZoom: 24,
+			type:'roadmap'
+		}).addTo(map);
+
+		var satMutant = L.gridLayer.googleMutant({
+			maxZoom: 24,
+			type:'satellite'
+		});
+
+		var terrainMutant = L.gridLayer.googleMutant({
+			maxZoom: 24,
+			type:'terrain'
+		});
+
+		var hybridMutant = L.gridLayer.googleMutant({
+			maxZoom: 24,
+			type:'hybrid'
+		});
+
+		var styleMutant = L.gridLayer.googleMutant({
+			styles: [
+				{elementType: 'labels', stylers: [{visibility: 'off'}]},
+				{featureType: 'water', stylers: [{color: '#444444'}]},
+				{featureType: 'landscape', stylers: [{color: '#eeeeee'}]},
+				{featureType: 'road', stylers: [{visibility: 'off'}]},
+				{featureType: 'poi', stylers: [{visibility: 'off'}]},
+				{featureType: 'transit', stylers: [{visibility: 'off'}]},
+				{featureType: 'administrative', stylers: [{visibility: 'off'}]},
+				{featureType: 'administrative.locality', stylers: [{visibility: 'off'}]}
+			],
+			maxZoom: 24,
+			type:'roadmap'
+		});
+
+		var trafficMutant = L.gridLayer.googleMutant({
+			maxZoom: 24,
+			type:'roadmap'
+		});
+		trafficMutant.addGoogleLayer('TrafficLayer');
+
+
+		var transitMutant = L.gridLayer.googleMutant({
+			maxZoom: 24,
+			type:'roadmap'
+		});
+		transitMutant.addGoogleLayer('TransitLayer');
+
+
+
+		L.control.layers({
+			Roadmap: roadMutant,
+			Aerial: satMutant,
+			Terrain: terrainMutant,
+		}, {}, {
+			collapsed: false
+		}).addTo(map);
+
+
+		var grid = L.gridLayer({
+			attribution: 'Grid Layer',
+
+		});
+
+		grid.createTile = function (coords) {
+			var tile = L.DomUtil.create('div', 'tile-coords');
+			tile.innerHTML = [coords.x, coords.y, coords.z].join(', ');
+
+			return tile;
+		};
+
+		map.addLayer(grid);
 
 	}
 </script>

@@ -13,7 +13,7 @@
     
     //get matched data from skills table
 	//echo "SELECT * FROM tbl_cellsite WHERE site_name LIKE '%".$searchTerm."%' ORDER BY site_name ASC";
-    $query = $db->query("SELECT * FROM tbl_cellsite WHERE cell_id LIKE '%".$searchTerm."%' ORDER BY cell_id ASC");
+    $query = $db->query("SELECT * FROM tbl_cellsite WHERE cell_id LIKE '%".$searchTerm."%' ORDER BY cell_id ASC LIMIT 10");
     while ($row = $query->fetch_assoc()) {
         $data[] = $row['cell_id'];
     }

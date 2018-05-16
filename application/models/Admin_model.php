@@ -43,15 +43,73 @@ class Admin_model extends CI_Model{
 	}
 		
 	public function getCellsite(){
-	return $query = $this->db->get('tbl_cellsite_backup');
+	return $query = $this->db->get('tbl_cellsite');
 		/*
 		Here you should note i am returning 
 		the query object instead of 
 		$query->result() or $query->result_array()
 		*/
-	}  
+	}
+	
+	public function bulkUpload($excelFile)
+	{
+		$enclose = '"';
+		$delimiter = ",";
+		$newline = "\r\n";
+		// $this->db->insert_batch('tbl_cellsite',$dataArray);
+		// return $this->db->affected_rows();
+		$path = FCPATH;
+		
+		$path = (str_replace('\\','/',$path));	
+		
+		// echo $path;
+		
+		$SQL = "LOAD DATA INFILE '".$path."uploads/".$excelFile."' 
+		INTO TABLE tbl_cellsite 
+		FIELDS TERMINATED BY '".$delimiter."' 
+		ENCLOSED BY '".$enclose."' 
+		LINES TERMINATED BY '".$newline."' 
+		IGNORE 1 ROWS
+		(operator, site_name, lac_id, cell_name, cell_id, antenna_direction, cell_beamspan, cell_beamrange, latitude, longitude, site_address, union_ward, thana, district, division, bts_type, cell_type_2g_3g)
+		SET laccellid = concat(lac_id,cell_id);";
+		
+		$query = $this->db->query($SQL);
+		//return $query->result();
+	}
 	
 	public function truncateCellsite(){
 	$this->db->truncate('tbl_cellsite');
 	}  
+	
+	public function batchInsertBackup()
+	{		
+		// $query = $this->db->get('tbl_cellsite');
+		// foreach ($query->result() as $row) {
+			  // $this->db->insert('tbl_cellsite_backup',$row);
+		// }
+		
+		$enclose = '"';
+		$delimiter = ",";
+		$newline = "\r\n";
+		// $this->db->insert_batch('tbl_cellsite',$dataArray);
+		// return $this->db->affected_rows();
+		$path = FCPATH;
+		
+		$path = (str_replace('\\','/',$path));	
+		
+		// echo $path;
+		
+		$SQL = "LOAD DATA INFILE '".$path."downloads/cellsite.csv' 
+		INTO TABLE tbl_cellsite_backup 
+		FIELDS TERMINATED BY '".$delimiter."' 
+		ENCLOSED BY '".$enclose."' 
+		LINES TERMINATED BY '".$newline."' 
+		IGNORE 1 ROWS;";
+		
+		$query = $this->db->query($SQL);
+	}
+	
+	public function truncateCellsiteBackup(){
+	$this->db->truncate('tbl_cellsite_backup');
+	} 
 }

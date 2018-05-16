@@ -21,7 +21,7 @@ class CellTriangulation_model extends CI_Model{
 		
 		if($cellidarray)
 		{
-			$this->db->or_where_in('cell_id', $cellidarray);
+			$this->db->or_where_in('laccellid', $cellidarray);
 		}
 		
 		

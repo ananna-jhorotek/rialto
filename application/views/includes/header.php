@@ -36,6 +36,14 @@
 		<!--- File Upload--->		
         <link rel="stylesheet" href="<?= base_url('assets/css/fileinput.css');?>">		
 		<!--- File Upload--->
+		
+		<!--- Map--->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCM17SPnOWcBur5ekpJ9rvFumehGZj8gLE" async defer></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script-->
+    <script src='https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js'></script>
         
      </head>
 

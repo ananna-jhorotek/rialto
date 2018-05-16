@@ -46,10 +46,10 @@
 													<option value="">Please Select</option>
 													<?php
 													$ref_types = $this->db
-																	->get('reference_details')->result_array();
+																	->get('tbl_reference_type')->result_array();
 													foreach ($ref_types as $ref_type):
 														?>                                                
-														<option value="<?= $ref_type['reference_type']; ?>"><?= $ref_type['reference_type']; ?></option>
+														<option value="<?= $ref_type['category']; ?>"><?= $ref_type['category']; ?></option>
 													<?php endforeach; ?> 
 												</select>
                                             </div>
