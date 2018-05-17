@@ -14,33 +14,42 @@ class PlottedCellsite_model extends CI_Model{
 		return date("YmdHis", $totalSeconds) . sprintf('%03d',$extraMilliseconds) ;
 	}
 
-	public function getData($laccellid,$bts,$lac,$thana)
+	public function getData($operator,$laccellid,$bts,$lac,$thana)
 	{
 		$this->db->select('tbl_cellsite.*');
 		$this->db->from('tbl_cellsite');
-		
-		if($laccellid)
+
+		if($operator)
 		{
-			$this->db->where('tbl_cellsite.laccellid', $laccellid);
+			$this->db->where('tbl_cellsite.operator', $operator);
+			
+			if($laccellid)
+			{
+				$this->db->where('tbl_cellsite.laccellid', $laccellid);
+			}
+			
+			if($bts)
+			{
+				$this->db->where('tbl_cellsite.site_name', $bts);
+			}
+			
+			if($lac)
+			{
+				$this->db->like('tbl_cellsite.lac_id',$lac);
+			}
+			
+			if($thana)
+			{
+				$this->db->like('tbl_cellsite.thana',$thana);
+			}
+			
+			$this->db->limit('1000');
+			$this->db->order_by('tbl_cellsite.antenna_direction','asc');
 		}
-		
-		if($bts)
+		else
 		{
-			$this->db->where('tbl_cellsite.site_name', $bts);
+			return false;
 		}
-		
-		if($lac)
-		{
-			$this->db->like('tbl_cellsite.lac_id',$lac);
-		}
-		
-		if($thana)
-		{
-			$this->db->like('tbl_cellsite.thana',$thana);
-		}
-		
-        $this->db->limit('1000');
-        $this->db->order_by('tbl_cellsite.antenna_direction','asc');
 		// $this->db->order_by('Date(`subscriptions.subscription_date`)');
 
 		$result = $this->db->get();

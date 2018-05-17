@@ -73,6 +73,7 @@ class PlottedCellsite extends CI_Controller{
 		else
 		{
 			// $operator	= @$requestDataArray['operator'];
+			$operator	= @$_POST['operator'];
 			$laccellid	= @$_POST['laccellid'];
 			$bts 		= @$_POST['bts'];
 			$lac		= @$_POST['lac'];
@@ -83,7 +84,7 @@ class PlottedCellsite extends CI_Controller{
 				return false;
 			}
 
-			$retrivedData = $this->PlottedCellsite_model->getData($laccellid,$bts,$lac,$thana);
+			$retrivedData = $this->PlottedCellsite_model->getData($operator, $laccellid, $bts, $lac, $thana);
 			
 			// echo '<pre/>';
 			// print_r($retrivedData);

@@ -19,13 +19,21 @@ class CellTriangulation_model extends CI_Model{
 		$this->db->select('tbl_cellsite.*');
 		$this->db->from('tbl_cellsite');
 		
-		if($cellidarray)
+		if($operator)
 		{
-			$this->db->or_where_in('laccellid', $cellidarray);
+			$this->db->where('operator', $operator);
+			if($cellidarray)
+			{
+				$this->db->where_in('laccellid', $cellidarray);
+			}	
+			$this->db->limit('1000');
+		}
+		else
+		{
+			return false;
 		}
 		
-		
-        $this->db->limit('1000');
+
 		// $this->db->order_by('Date(`subscriptions.subscription_date`)');
 
 		$result = $this->db->get();
@@ -79,10 +87,20 @@ class CellTriangulation_model extends CI_Model{
 	}
 	
 	
-	public function getDataByArea($area_range, $latitude, $longitude)
+	public function getDataByArea($operator, $area_range, $latitude, $longitude)
 	{
 		$this->db->select('tbl_cellsite.*');
 		$this->db->from('tbl_cellsite');
+		if($operator)
+		{
+			$this->db->where('operator', $operator);
+			// $this->db->where('latitude', $latitude);
+			// $this->db->where('longitude', $longitude);
+		}
+		else
+		{
+			return false;
+		}
 		$resultArray = $this->db->get()->result_array();
 		
 		$myArray = array();
@@ -151,15 +169,18 @@ class CellTriangulation_model extends CI_Model{
 		
 	}
 	
-	public function getDataByThana($thana)
+	public function getDataByThana($operator, $thana)
 	{
 		
 		$this->db->select('tbl_cellsite.*');
 		$this->db->from('tbl_cellsite');
-		if($thana)
+		if($operator)
 		{
-			// $this->db->like('tbl_cellsite.thana',$thana);
-			$this->db->or_where_in('thana', $thana);
+			$this->db->where('operator', $operator);
+			if($thana)
+			{
+				$this->db->or_where_in('thana', $thana);
+			}
 		}
 		else
 		{

@@ -33,7 +33,7 @@
 //      zoomSnap: 0.1
 		};
 
-		map = L.map('map', mapopts).setView([0,0],0);
+		map = L.map('map', mapopts).setView([23.7526, 90.3792],14);
 
 		var roadMutant = L.gridLayer.googleMutant({
 			maxZoom: 24,
@@ -118,6 +118,7 @@
     var gp = ['#0063af','#9999ff','#8080ff','#4d4dff','#1a1aff','#0000e6'];
     var bl = ['#f27025', '#F37E3B', '#F58D51', '#F69B66', '#F7A97C', '#F8B892'];
     var robi = ['#fe0002', '#FE1A1B', '#FE3335', '#FE4C4E', '#FE6667', '#FE8080'];
+    var tt = ['#5b9936', '#66ab3d', '#75b350', '#84bb63', '#93c477', '#a3cc8a'];
 	var marker_array = new Array();
 	var bts_array = [];
 	
@@ -267,6 +268,10 @@
 
 
     $('#mySubmit').on('click',function(){		
+				$(document).ready(function () {
+					var html = "<p></p>";
+			   $('#btsmgs').html(html);
+			});
 		for(var i = 0; i < marker_array.length; i++){
 				map.removeLayer(marker_array[i]);
 			}
@@ -355,7 +360,7 @@
 					
 					//$("#Modal").modal({show:false});
 					var myIcon = L.divIcon({className: 'my-div-icon',
-						  html:'<div  style="font-size: 5px;" align="center"><img width="35" height="35" src="<? echo site_url('assets/images/newbtsicon.png');?>" style=" margin-top: -15px; margin-left: -25px; " class="icon-enviroment anticon location" type="enviroment"><p>'+json[i].site_name+'</p></div>',iconSize: null});
+						  html:'<div  style="font-size: 5px;" align="center"><img width="35" height="35" src="<?php echo site_url('assets/images/newbtsicon.png');?>" style=" margin-top: -15px; margin-left: -25px; " class="icon-enviroment anticon location" type="enviroment"><p>'+json[i].site_name+'</p></div>',iconSize: null});
 						  
                     marker = L.marker([json[i].latitude, json[i].longitude], {icon: myIcon}).addTo(map);
 					bts_array.push(marker);
@@ -367,6 +372,10 @@
                     else if(json[i].operator == 'GRAMEENPHONE')
                     {
                         color = gp[ parseInt(json[i].antenna_direction / 60)];
+                    }
+					else if(json[i].operator == 'TELETALK')
+                    {
+                        color = tt[ parseInt(json[i].antenna_direction / 60)];
                     }
                     else
                     {

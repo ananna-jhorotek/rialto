@@ -262,7 +262,7 @@ $(function() {
 	var map;
 	var show = null;
 	var myIcon = L.divIcon({className: 'my-div-icon',
-						  html:'<img src="<? echo site_url('assets/images/bts.png');?>" style=" margin-top: -15px; margin-left: -25px; " class="icon-enviroment anticon location" type="enviroment">',
+						  html:'<img src="<?php echo site_url('assets/images/bts.png');?>" style=" margin-top: -15px; margin-left: -25px; " class="icon-enviroment anticon location" type="enviroment">',
 						 
 						  iconSize: null});
 
@@ -285,7 +285,7 @@ $(function() {
 //      zoomSnap: 0.1
 		};
 
-		map = L.map('map', mapopts).setView([0,0],0);
+		map = L.map('map', mapopts).setView([23.7526, 90.3792],14);
 
 		var roadMutant = L.gridLayer.googleMutant({
 			maxZoom: 24,
@@ -372,6 +372,7 @@ $(function() {
     var gp = ['#0063af','#1A73B7','#3382BF','#4C92C7','#66A1CF','#80B1D7'];
     var bl = ['#f27025', '#F37E3B', '#F58D51', '#F69B66', '#F7A97C', '#F8B892'];
     var robi = ['#fe0002', '#FE1A1B', '#FE3335', '#FE4C4E', '#FE6667', '#FE8080'];
+    var tt = ['#5b9936', '#66ab3d', '#75b350', '#84bb63', '#93c477', '#a3cc8a'];
 	var marker_array = new Array();
 	var bts_array = [];
     $(document).ready(function(){
@@ -388,12 +389,16 @@ $(function() {
 			// cellid = cellid.substring(1,cellid.lastIndexOf(","));
 			$('#input').val($('#input').val()+cellid);
 			
-			document.getElementById('operator').value="";
+			// document.getElementById('operator').value="";
 		}
 	);
 	
 
     $('#submitOperator').on('click',function (){
+		$(document).ready(function () {
+							var html = "<p></p>";
+					   $('#btsmgs').html(html);
+					});
 		console.log("marker aRRAY");
 		console.log(marker_array.length);
 		for(var i = 0; i < marker_array.length; i++){
@@ -403,7 +408,8 @@ $(function() {
 				map.removeLayer(bts_array[i]);
 			}
 			
-        var operator = document.getElementById('operator').value;
+		var operator = document.getElementById('operator').value;
+		console.log(operator);
         var cellid = document.getElementById('input').value;
 		var cellid = cellid.trim();
 		var array = cellid.split(',');
@@ -415,14 +421,19 @@ $(function() {
 		// alert('WAIT');
 		
 		
+		data = {'operator':operator, 'cellid':cellid};
+		console.log(data);
+		
 		//--------- Generating title for body ---------
+
+		
 		function removeEmpty(obj) {
-		  Object.keys(obj).forEach(function(key) {
-			(obj[key] && typeof obj[key] === 'object') && removeEmpty(obj[key]) ||
-			(obj[key] === undefined || obj[key] === null || obj[key]=="") && delete obj[key]
-		  });
-		  return obj;
-		};
+			  Object.keys(obj).forEach(function(key) {
+				(obj[key] && typeof obj[key] === 'object') && removeEmpty(obj[key]) ||
+				(obj[key] === undefined || obj[key] === null || obj[key]=="") && delete obj[key]
+			  });
+			  return obj;
+			};
 
 
 
@@ -455,7 +466,8 @@ $(function() {
 		$.ajax({
 			type: "POST",  
 			url: "<?php echo site_url('RequestLogs/storeLogs');?>",
-			data: {'operator':operator,'cellid':cellid},
+			// data: {'operator':operator,'cellid':cellid},
+			data: data,
 			dataType: 'json', 
 			success: function(data){
 			}     
@@ -466,7 +478,8 @@ $(function() {
 		$.ajax({
 			type: "POST",  
 			url: "<?php echo site_url('CellTriangulation/operator');?>",
-			data: {'operator':operator,'cellid':cellid},
+			// data: {'operator':operator,'cellid':cellid},
+			data: data,
 			dataType: 'json', 
 			success: function(data){
 				myData = JSON.stringify(data);
@@ -480,7 +493,7 @@ $(function() {
 					
 					//$("#Modal").modal({show:false});
 					var myIcon = L.divIcon({className: 'my-div-icon',
-						  html:'<div  style="font-size: 5px;" align="center"><img width="35" height="35" src="<? echo site_url('assets/images/newbtsicon.png');?>" style=" margin-top: -15px; margin-left: -25px; " class="icon-enviroment anticon location" type="enviroment"><p>'+json[i].site_name+'</p></div>',
+						  html:'<div  style="font-size: 5px;" align="center"><img width="35" height="35" src="<?php echo site_url('assets/images/newbtsicon.png');?>" style=" margin-top: -15px; margin-left: -25px; " class="icon-enviroment anticon location" type="enviroment"><p>'+json[i].site_name+'</p></div>',
 						 
 						  iconSize: null});
                     marker = L.marker([json[i].latitude, json[i].longitude], {icon: myIcon}).addTo(map);
@@ -495,10 +508,15 @@ $(function() {
                     {
                         color = gp[ parseInt(json[i].antenna_direction / 60)];
                     }
+					else if(json[i].operator == 'TELETALK')
+                    {
+                        color = tt[ parseInt(json[i].antenna_direction / 60)];
+                    }
                     else
                     {
                         color = robi[ parseInt(json[i].antenna_direction / 60) ];
                     }
+                    console.log(operator);
                     console.log(color);
                     show = L.semiCircle([json[i].latitude, json[i].longitude], {
                         radius: json[i].cell_beamrange,
@@ -627,15 +645,22 @@ $(function() {
     var gp = ['#0063af','#1A73B7','#3382BF','#4C92C7','#66A1CF','#80B1D7'];
     var bl = ['#f27025', '#F37E3B', '#F58D51', '#F69B66', '#F7A97C', '#F8B892'];
     var robi = ['#fe0002', '#FE1A1B', '#FE3335', '#FE4C4E', '#FE6667', '#FE8080'];
+    var tt = ['#5b9936', '#66ab3d', '#75b350', '#84bb63', '#93c477', '#a3cc8a'];
     $(document).ready(function(){
 		
 		$('#submitThana').on('click',function () {
+			
+			$(document).ready(function () {
+					var html = "<p></p>";
+			   $('#btsmgs').html(html);
+			});
 			if(circle != null){
 				map.removeLayer(circle);
 			}
 			
 			console.log('search icon clicked');
 			var operator = document.getElementById('operator').value;
+			console.log(operator);
 			var longitude = document.getElementById('longitude').value;
 			var latitude = document.getElementById('latitude').value;
 			var area_range = document.getElementById('area_range').value;
@@ -736,7 +761,7 @@ $(function() {
 					
 					//$("#Modal").modal({show:false});
 					var myIcon = L.divIcon({className: 'my-div-icon',
-						  html:'<div  style="font-size: 5px;" align="center"><img width="35" height="35" src="<? echo site_url('assets/images/newbtsicon.png');?>" style=" margin-top: -15px; margin-left: -25px; " class="icon-enviroment anticon location" type="enviroment"><p>'+json[i].site_name+'</p></div>',
+						  html:'<div  style="font-size: 5px;" align="center"><img width="35" height="35" src="<?php echo site_url('assets/images/newbtsicon.png');?>" style=" margin-top: -15px; margin-left: -25px; " class="icon-enviroment anticon location" type="enviroment"><p>'+json[i].site_name+'</p></div>',
 						 
 						  iconSize: null});
                     marker = L.marker([json[i].latitude, json[i].longitude], {icon: myIcon}).addTo(map);
@@ -750,6 +775,10 @@ $(function() {
                     else if(json[i].operator == 'GRAMEENPHONE')
                     {
                         color = gp[ parseInt(json[i].antenna_direction / 60)];
+                    }
+					else if(json[i].operator == 'TELETALK')
+                    {
+                        color = tt[ parseInt(json[i].antenna_direction / 60)];
                     }
                     else
                     {

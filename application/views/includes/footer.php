@@ -76,6 +76,16 @@
 			$('.data-table').DataTable();
 		} );
     </script>
+	
+	<script type="text/javascript">
+        	$(document).ready(function() {
+		var navbar = $(".skin-blue .main-header nav");
+		
+		$('.row').mouseover(function() {
+			navbar.addClass("nav-fixed");
+		})  
+});
+    </script>
    
     <script src="<?= base_url('assets/js/app.min.js');?>"></script>
     <script src="<?= base_url('assets/js/demo.js');?>"></script>

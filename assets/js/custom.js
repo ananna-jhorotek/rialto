@@ -3,11 +3,13 @@
 	//fixed navigation menu
 	$(document).ready(function() {
 		var navbar = $(".skin-blue .main-header nav");
+		var header = $(".skin-blue .main-header");
 		
-		$('.box').mouseover(function() {
+		$('.row').mouseover(function() {
 			//$('.phone-map').css('background-image', 'url("assets/smartmapMobile/smartmapMobile_2.png")');
 			// alert(navbar.attr('class'));
 			navbar.addClass("nav-fixed");
+			header.addClass("header-margin");
 		})
 		
 		// $(window).scroll(function() {    

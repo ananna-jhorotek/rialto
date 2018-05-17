@@ -127,7 +127,8 @@ class CellTriangulation extends CI_Controller{
 		fwrite($myfile, $logString);
 		fclose($myfile);
 
-			$area_range			= @$_POST['area_range'];
+			$operator		= @$_POST['operator'];
+			$area_range		= @$_POST['area_range'];
 			$thana 			= @$_POST['thana'];
 			$latitude 		= @$_POST['latitude'];
 			$longitude 		= @$_POST['longitude'];
@@ -152,7 +153,7 @@ class CellTriangulation extends CI_Controller{
 			}
 			else{
 				// die("There");
-				$retrivedData = $this->CellTriangulation_model->getDataByArea($area_range, $latitude, $longitude);
+				$retrivedData = $this->CellTriangulation_model->getDataByArea($operator, $area_range, $latitude, $longitude);
 			}
 			
 			// echo $this->db->last_query();
@@ -232,6 +233,7 @@ class CellTriangulation extends CI_Controller{
 		// fwrite($myfile, $logString);
 		// fclose($myfile);
 
+			$operator			= @$_POST['operator'];
 			$area_range			= @$_POST['area_range'];
 			$thana 			= @$_POST['thana'];
 			$latitude 		= @$_POST['latitude'];
@@ -242,21 +244,21 @@ class CellTriangulation extends CI_Controller{
 			// $latitude 		= @$requestDataArray['latitude'];
 			// $longitude 		= @$requestDataArray['longitude'];
 			
-			if(($area_range == NULL) && ($thana == NULL) && ($longitude == NULL) && ($latitude == NULL))
+			if(($operator == NULL) && ($area_range == NULL) && ($thana == NULL) && ($longitude == NULL) && ($latitude == NULL))
 			{
 				return false;
 			}
-			else if(($thana != NULL) && ($area_range == NULL) && ($longitude == NULL) && ($latitude == NULL))
+			else if(($operator != NULL) && ($thana != NULL) && ($area_range == NULL) && ($longitude == NULL) && ($latitude == NULL))
 			{
 				$thana = rtrim($thana,',');
 				$thana = explode(',', $thana);
 				
-				$retrivedData = $this->CellTriangulation_model->getDataByThana($thana);
+				$retrivedData = $this->CellTriangulation_model->getDataByThana($operator, $thana);
 				// return false;
 			}
 			else{
 				// die("There");
-				$retrivedData = $this->CellTriangulation_model->getDataByArea($area_range, $latitude, $longitude);
+				$retrivedData = $this->CellTriangulation_model->getDataByArea($operator, $area_range, $latitude, $longitude);
 			}
 			
 			// echo $this->db->last_query();
