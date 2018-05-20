@@ -186,7 +186,7 @@ $(function() {
         }
     })
     .autocomplete({
-        minLength: 1,
+        minLength: 5,
         source: function( request, response ) {
             // delegate back to autocomplete, but extract the last term
             $.getJSON("laccellidAjax.php", { term : extractLast( request.term )},response);
@@ -383,10 +383,15 @@ $(function() {
 		function(){
 			var cellid = document.getElementById('cellid').value;
 			var cellid = cellid.trim();
+			
+			var operators = document.getElementById('operator').value;
+			var operators = operators.trim();
 			$('#cellid').val("");		
 			
+			$('#InputsWrapperOperator').show();
 			$('#InputsWrapper').show();
 			// cellid = cellid.substring(1,cellid.lastIndexOf(","));
+			$('#operators').val($('#operators').val()+operators+",");
 			$('#input').val($('#input').val()+cellid);
 			
 			// document.getElementById('operator').value="";
@@ -408,8 +413,9 @@ $(function() {
 				map.removeLayer(bts_array[i]);
 			}
 			
-		var operator = document.getElementById('operator').value;
+		var operator = document.getElementById('operators').value;
 		console.log(operator);
+		
         var cellid = document.getElementById('input').value;
 		var cellid = cellid.trim();
 		var array = cellid.split(',');
@@ -612,6 +618,7 @@ $(function() {
 					
 				  document.getElementById('cellid').value="";
 				  document.getElementById('operator').value="";
+				  document.getElementById('operators').value="";
 				  document.getElementById('input').value="";
 				
 				
@@ -948,6 +955,12 @@ $(function() {
 					<div class="form-group text-center">
 						<input type="button" id="addbutton" class="btn btn-info" value="Add"/>
 					</div>							
+					
+					<div class="form-group">
+						<div id="InputsWrapperOperator" style="display:none">
+							<div><input class="form-control" type="text" name="operators" id="operators" placeholder="Selected Operator"></div>
+						</div>								
+					</div>
 					
 					<div class="form-group">
 						<div id="InputsWrapper" style="display:none">

@@ -313,69 +313,82 @@ class Admin extends CI_Controller{
 
 	public function bulk_upload()
 	{	
-		//Generating a csv file of current cellsite table
-		$this->load->dbutil();
-		$this->load->helper('file');
-		$this->load->helper('download');
-		
-		$cellsites = $this->Admin_model->getCellsite();
-		$delimiter = ",";
-		$newline = "\r\n";
-		
-		$cellsite_csv = $this->dbutil->csv_from_result($cellsites, $delimiter, $newline);
-		
-		write_file(FCPATH.'downloads/cellsite.csv',$cellsite_csv);
+		$csvMimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
+		if(!empty($_FILES['gsmdata']['name']) && in_array($_FILES['gsmdata']['type'],$csvMimes))
+		{
+			//Generating a csv file of current cellsite table
+			$this->load->dbutil();
+			$this->load->helper('file');
+			$this->load->helper('download');
+			
+			$cellsites = $this->Admin_model->getCellsite();
+			$delimiter = ",";
+			$newline = "\r\n";
+			
+			$cellsite_csv = $this->dbutil->csv_from_result($cellsites, $delimiter, $newline);
+			
+			write_file(FCPATH.'downloads/cellsite.csv',$cellsite_csv);
 
-		// truncate backup table
-		$this->Admin_model->truncateCellsiteBackup();
-		
-		// insert current cellsites to backup table
-		$this->Admin_model->batchInsertBackup();
-		
-		// //Generating a csv file of backup table
-		// $this->load->dbutil();
-		// $this->load->helper('file');
-		// $this->load->helper('download');
-		
-		// $report = $this->Admin_model->getCellsite();
-		// $delimiter = ",";
-		// $newline = "\r\n";
-		
-		// $new_report = $this->dbutil->csv_from_result($report, $delimiter, $newline);
-		
-		// if ( ! write_file(FCPATH.'downloads/cellsite_backup.csv',$new_report))
-		// {
-			// $this->session->set_flashdata('error_msg', 'File Upload failed');
+			// truncate backup table
+			$this->Admin_model->truncateCellsiteBackup();
+			
+			// insert current cellsites to backup table
+			$this->Admin_model->batchInsertBackup();
+			
+			// //Generating a csv file of backup table
+			// $this->load->dbutil();
+			// $this->load->helper('file');
+			// $this->load->helper('download');
+			
+			// $report = $this->Admin_model->getCellsite();
+			// $delimiter = ",";
+			// $newline = "\r\n";
+			
+			// $new_report = $this->dbutil->csv_from_result($report, $delimiter, $newline);
+			
+			// if ( ! write_file(FCPATH.'downloads/cellsite_backup.csv',$new_report))
+			// {
+				// $this->session->set_flashdata('error_msg', 'File Upload failed');
+				// $this->load->view('layout/header');
+				// $this->load->view('Dashboard/Admin_upload',array()); 
+				// $this->load->view('layout/footer');
+			// }
+			// else
+			// {
+				// $this->session->set_flashdata('success_msg', 'File has been Uploaded !!');
+				// $this->Admin_model->truncateCellsite();
+			// }
+			
+			$this->Admin_model->truncateCellsite();
+			
+			$uploads_dir = FCPATH."uploads";
+			// foreach ($_FILES["gsmdata"]["error"] as $key => $error)
+			// {
+				// if ($error == UPLOAD_ERR_OK) {
+					
+					$tmp_name = $_FILES["gsmdata"]["tmp_name"];
+					// basename() may prevent filesystem traversal attacks;
+					// further validation/sanitation of the filename may be appropriate
+					$name = basename($_FILES["gsmdata"]["name"]);
+					move_uploaded_file($tmp_name, "$uploads_dir/$name");
+				// }
+			// }
+			$this->Admin_model->bulkUpload($name);
+			unlink($uploads_dir."/".$name);
+
+			$this->session->set_flashdata('success_msg', 'File has been Uploaded !!');
 			// $this->load->view('layout/header');
 			// $this->load->view('Dashboard/Admin_upload',array()); 
 			// $this->load->view('layout/footer');
-		// }
-		// else
-		// {
-			// $this->session->set_flashdata('success_msg', 'File has been Uploaded !!');
-			// $this->Admin_model->truncateCellsite();
-		// }
-		
-		$this->Admin_model->truncateCellsite();
-		
-		$uploads_dir = FCPATH."uploads";
-		// foreach ($_FILES["gsmdata"]["error"] as $key => $error)
-		// {
-			// if ($error == UPLOAD_ERR_OK) {
-				
-				$tmp_name = $_FILES["gsmdata"]["tmp_name"];
-				// basename() may prevent filesystem traversal attacks;
-				// further validation/sanitation of the filename may be appropriate
-				$name = basename($_FILES["gsmdata"]["name"]);
-				move_uploaded_file($tmp_name, "$uploads_dir/$name");
-			// }
-		// }
-		$this->Admin_model->bulkUpload($name);
-
-		$this->session->set_flashdata('success_msg', 'File has been Uploaded !!');
-		$this->load->view('layout/header');
-		$this->load->view('Dashboard/Admin_upload',array()); 
-		$this->load->view('layout/footer');
+			redirect('Admin/index','refresh');
+		}
+		else {
+			$this->session->set_flashdata('error_msg', 'Wrong Format! Please upload CSV File!!');
+			// $this->load->view('layout/header');
+			// $this->load->view('Dashboard/Admin_upload',array()); 
+			// $this->load->view('layout/footer');
+			redirect('Admin/index','refresh');
+		}
 	}
 	
 	public function upload()

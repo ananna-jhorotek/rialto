@@ -70,10 +70,13 @@ class CellTriangulation extends CI_Controller{
 			$cellidString 	= @$_POST['cellid'];
 			
 			
+			$operatorArrayString = rtrim($operator,',');
+			$operatorarray = explode(',', $operatorArrayString);
+			
 			$cellidArrayString = rtrim($cellidString,',');
 			$cellidarray = explode(',', $cellidArrayString);
 			
-			$retrivedData = $this->CellTriangulation_model->getDataByOperator($operator,$cellidarray);
+			$retrivedData = $this->CellTriangulation_model->getDataByOperator($operatorarray, $cellidarray);
 			
 			// echo $cellidarray;
 			// echo $this->db->last_query();

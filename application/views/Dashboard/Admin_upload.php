@@ -22,7 +22,7 @@ if($this->session->flashdata('error_msg')){
 	<form name="fileupload" id="fileupload" action="<?php echo base_url('Admin/bulk_upload');?>" method="post" enctype="multipart/form-data">
 		
 		<div class="search_bar text-center">				
-			<label >
+			<label>
 				Upload CELLSITE data file : 
 			</label>
 			<label class="btn btn-default btn-file">

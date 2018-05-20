@@ -202,7 +202,7 @@
       <section class="content">
      
 <script type="text/javascript">
-setTimeout(onUserInactivity, 1000 * 300)
+setTimeout(onUserInactivity, 1000 * 9000)
 function onUserInactivity() {
    window.location.href = "<?= site_url('auth/logout'); ?>"
 }

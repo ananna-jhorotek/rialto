@@ -19,19 +19,33 @@ class CellTriangulation_model extends CI_Model{
 		$this->db->select('tbl_cellsite.*');
 		$this->db->from('tbl_cellsite');
 		
-		if($operator)
-		{
-			$this->db->where('operator', $operator);
-			if($cellidarray)
-			{
-				$this->db->where_in('laccellid', $cellidarray);
-			}	
-			$this->db->limit('1000');
-		}
-		else
-		{
-			return false;
-		}
+		$this->db->group_start();
+		$i=0;
+		$this->db->where('operator', $operator[$i]);
+		$this->db->where('laccellid', $cellidarray[$i]);
+			
+		for ($i = 1; $i < sizeof($operator); $i++) {
+                $this->db->or_group_start();
+					$this->db->where('operator', $operator[$i]);
+					$this->db->where('laccellid', $cellidarray[$i]);
+                $this->db->group_end();
+		} 
+		$this->db->group_end();
+		$this->db->limit('1000');
+				
+		// if($operator)
+		// {
+			// $this->db->where('operator', $operator);
+			// if($cellidarray)
+			// {
+				// $this->db->where_in('laccellid', $cellidarray);
+			// }	
+			// $this->db->limit('1000');
+		// }
+		// else
+		// {
+			// return false;
+		// }
 		
 
 		// $this->db->order_by('Date(`subscriptions.subscription_date`)');
