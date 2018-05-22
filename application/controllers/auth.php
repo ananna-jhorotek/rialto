@@ -89,6 +89,8 @@ class auth extends CI_Controller {
                 redirect('dashboards/admin_dashboard');               
             }if ($newdata['role_type'] == 'END USER - INFO REQUEST') {            
                 redirect('dashboards/info_request_dashboard');               
+            }else if ($newdata['role_type'] == 'SUPER IMMC SUPPORT TEAM') {                
+                redirect('dashboards/super_request_provider_dashboard');               
             }else if ($newdata['role_type'] == 'IMMC SUPPORT TEAM') {                
                 redirect('dashboards/request_provider_dashboard');               
             }else{

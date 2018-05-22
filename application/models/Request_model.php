@@ -115,12 +115,13 @@ class Request_model extends CI_Model
            return $this->db->get('tbl_req_mno_msisdn')->result_array();            
         }
         function get_admin_dash_pending_request_data($target_number,$request_by,$crime_type,$start_date,$end_date) {
-            $this->db->join('users','users.id=tbl_req_mno_msisdn.requested_by');
+            $this->db->select('users.*, tbl_req_mno_msisdn.*,designations.*,tbl_crimeinfo.*,battalions.*');
+            $this->db->join('users','users.id=tbl_req_mno_msisdn.requested_for');
             $this->db->join('battalions', 'battalions.battalions_id=users.battalions_id');
             $this->db->join('designations', 'designations.designations_id=users.designations_id');
             $this->db->join('tbl_crimeinfo', 'tbl_crimeinfo.id=tbl_req_mno_msisdn.reason_crime_type');
-            $this->db->where('request_type', 'general');
-            $this->db->where('tbl_req_mno_msisdn.battalions_id', $this->session->userdata('battalion_id'));
+			$this->db->where('tbl_req_mno_msisdn.battalions_id', $this->session->userdata('battalion_id'));
+            $this->db->where('general_type', 1);
             $this->db->where('tbl_req_mno_msisdn.request_status','New');
             $this->db->where('date_requested <', date('Y-m-d'));                                                                
             if($target_number !='')

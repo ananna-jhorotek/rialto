@@ -22,7 +22,7 @@
                                                     ->where('date_requested', date('Y-m-d'))                                                    
                                                     ->where('general_type', 1)
                                                     ->where('is_approved', 0)
-                                                    ->where('battalions_id', $this->session->userdata('battalion_id'))
+                                                    // ->where('battalions_id', $this->session->userdata('battalion_id'))
                                                     ->get('tbl_req_mno_msisdn')
                                                     ->num_rows(); ?>                  
                   <?php $special_request_number = $this->db
@@ -30,7 +30,7 @@
                                                     ->where('date_requested', date('Y-m-d'))                                                    
                                                     ->where('special', 1)
                                                     ->where('is_approved', 1)
-                                                    ->where('battalions_id', $this->session->userdata('battalion_id'))
+                                                    // ->where('battalions_id', $this->session->userdata('battalion_id'))
                                                     ->get('tbl_req_mno_msisdn')
                                                     ->num_rows();?>
                   <?php $total_new = $general_request_number+$special_request_number; ?>                  
@@ -40,7 +40,7 @@
             <div class="icon">
               <i class="fa fa-users fa-1x" style="margin-top: 19px;"></i>
             </div>
-            <a href="<?= site_url('RequestProvider/new_request_details'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?= site_url('SuperRequestProvider/new_request_details'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -52,7 +52,7 @@
                                                         ->where('request_status', 'new')
                                                         ->where('date_requested <', date('Y-m-d'))
                                                         ->where('general_type', 1)
-                                                        ->where('battalions_id', $this->session->userdata('battalion_id'))
+                                                        // ->where('battalions_id', $this->session->userdata('battalion_id'))
                                                         ->get('tbl_req_mno_msisdn')
                                                         ->num_rows(); ?>                  
                 <?php $special_pending_request_number = $this->db
@@ -60,7 +60,7 @@
                                                     ->where('date_requested <', date('Y-m-d'))                                                    
                                                     ->where('special', 1)
                                                     ->where('is_approved', 1)
-                                                    ->where('battalions_id', $this->session->userdata('battalion_id'))
+                                                    // ->where('battalions_id', $this->session->userdata('battalion_id'))
                                                     ->get('tbl_req_mno_msisdn')
                                                     ->num_rows();?>
                   <?php $total_pending = $pending_request_number+$special_pending_request_number; ?>               
@@ -70,7 +70,7 @@
             <div class="icon">
               <i class="fa fa-bell-slash-o" style="margin-top: 19px;"></i>
             </div>
-            <a href="<?= site_url('RequestProvider/pending_request_details'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?= site_url('SuperRequestProvider/pending_request_details'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -90,7 +90,7 @@
             <div class="icon">
               <i class="fa fa-bell" style="margin-top: 19px;"></i>
             </div>
-            <a href="<?= site_url('RequestProvider/completed_request_details'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?= site_url('SuperRequestProvider/completed_request_details'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->

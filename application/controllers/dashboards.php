@@ -30,7 +30,13 @@ class dashboards extends CI_Controller {
 //        $this->load->view('layout/footer');
     }
     
-    public function request_provider_dashboard() {       
+    public function super_request_provider_dashboard() {       
+	$this->load->view('layout/header');
+        $this->load->view('dashboard/super_request_provider_dashboard');
+	$this->load->view('layout/footer');
+    }
+	
+	public function request_provider_dashboard() {       
 	$this->load->view('layout/header');
         $this->load->view('dashboard/request_provider_dashboard');
 	$this->load->view('layout/footer');

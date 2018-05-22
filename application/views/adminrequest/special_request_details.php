@@ -96,7 +96,7 @@
                                                                 ->join('designations', 'designations.designations_id=users.designations_id')
                                                                 ->join('tbl_crimeinfo', 'tbl_crimeinfo.id=tbl_req_mno_msisdn.reason_crime_type')
                                                                 ->where('tbl_req_mno_msisdn.request_status', 'New')
-                                                                ->where('tbl_req_mno_msisdn.date_requested', date('Y-m-d'))
+                                                                // ->where('tbl_req_mno_msisdn.date_requested', date('Y-m-d'))
                                                                 ->where('tbl_req_mno_msisdn.special', 1)
                                                                 ->where('tbl_req_mno_msisdn.is_approved', 0)
                                                                 ->where('tbl_req_mno_msisdn.battalions_id', $this->session->userdata('battalion_id'))
@@ -115,10 +115,10 @@
                                                            data-transaction_id="<?= $default_data['request_id'] ?>"
                                                            title="Details"><i class="fa fa-eye"></i> 
                                                         </a>                                                     
-                                                        <a href="<?= site_url('admin_request/approve_request/' . $default_data['request_id']) ?>"
+                                                        <!--a href="<?= site_url('admin_request/approve_request/' . $default_data['request_id']) ?>"
                                                            onclick="return confirm('Are you sure you want to Approve this Request?');"
                                                            class="btn btn-danger btn-xs" data-toggle="tooltip" title="Approve"><i class="fa fa-forward"></i> 
-                                                        </a>
+                                                        </a-->
                                                 </td>
                                             </tr>                                             
                                             <?php $i++; endforeach;?>                                        

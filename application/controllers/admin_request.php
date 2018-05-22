@@ -96,7 +96,7 @@ class Admin_request extends CI_Controller {
             'approved_by' => $this->session->userdata('user_id')             
         );
         $this->request_model->update_request_info($update_request_info, $request_id); 
-        redirect('admin_request/special_request_details');
+        redirect('admin/new_request_details');
     }
     
        

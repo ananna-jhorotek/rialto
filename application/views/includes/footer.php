@@ -25,7 +25,7 @@
     
     
     <!--<script src="<?= base_url('assets/js/jquery-ui.js');?>"></script>-->
-    <script language="JavaScript" type="text/javascript" src="<?= base_url('assets/js/jquery-2.2.3.min.js');?>"></script>   
+    <!--script language="JavaScript" type="text/javascript" src="<?= base_url('assets/js/jquery-2.2.3.min.js');?>"></script-->   
     <script language="JavaScript" type="text/javascript" src="<?= base_url('assets/js/jquery-ui.min.js');?>"></script>
     <script src="<?php echo base_url('assets/js/moment-with-locales.js');?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap-datetimepicker.min.js');?>"></script>
@@ -57,9 +57,8 @@
     <!--<script src="<?= base_url('assets/js/bootstrap-datepicker.js');?>"></script>-->
     <script src="<?= base_url('assets/js/jquery.dataTables.min.js');?>"></script>
     <script src="<?= base_url('assets/js/dataTables.bootstrap4.min.js');?>"></script>
-    <script src="<?= base_url('assets/js/jquery-1.12.4.js');?>"></script>
-    <script src="<?= base_url('assets/js/jquery.dataTables.min.js');?>"></script>
-    <script src="<?= base_url('assets/js/custom.js');?>"></script>
+    <!--script src="<?= base_url('assets/js/jquery-1.12.4.js');?>"></script>
+    <script src="<?= base_url('assets/js/custom.js');?>"></script-->
     <script type="text/javascript" src="<?= base_url('assets/js/prettify.js');?>"></script>
    
     
