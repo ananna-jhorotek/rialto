@@ -7,7 +7,7 @@ class Settings_model extends CI_Model
 		parent :: __construct();
 	}
         
-      function save($input, $table) {
+	function save($input, $table) {
         $this->db->insert($table, $input); 
         return $this->db->insert_id();
     }   

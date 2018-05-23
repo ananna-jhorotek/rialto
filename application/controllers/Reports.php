@@ -303,7 +303,6 @@ class Reports extends CI_Controller{
         $data['main_content'] = 'Dashboard/log_details_view';
         $this->load->view('includes/template', $data);
     }
-
     function save_request_info() {
         //var_dump($this->input->post());die;
         if($this->input->post('requested_by') == $this->session->userdata('user_id')){
@@ -357,6 +356,19 @@ class Reports extends CI_Controller{
             'requested_by' => $this->session->userdata('user_id')             
         );
 	$save = $this->settings_model->save($save_user, 'tbl_req_mno_msisdn');
+	
+	$user = $this->Login_m->getUserById($this->session->userdata('user_id'));
+	
+	// $this->db->select('users.email');
+		// $this->db->from('users');		
+		// $this->db->where('id', $input['requested_by']);
+		
+		// $user = $this->db->get()->row();
+		
+		$emailurl= "http://www.jhorotek.com/phpmailer/examples/rialto_info_req.php?email=$user->email";
+		$emailurl = str_replace(" ", "+", $emailurl);
+		$emailurl = file_get_contents($emailurl);	
+
         
     }
 

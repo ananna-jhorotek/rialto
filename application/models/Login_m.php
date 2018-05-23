@@ -30,4 +30,25 @@ class Login_m extends CI_Model{
             return false;
         }
     }
+	
+		//Retrieving email/username by cd_user_id
+	function getUserById($userid)
+	{		
+		$this->db->select('users.email');
+
+		$this->db->from('users');		
+		$this->db->where('id', $userid);
+		
+		$result = $this->db->get();
+
+
+		if( $result->num_rows() > 0 )	
+		{
+			return $result->row();
+		}
+		else
+		{
+			return false;
+		}
+	}
 }

@@ -94,7 +94,7 @@
                                     <?php $default_datas = $this->db
                                                                 ->select('t1.name as usersname,t2.name as users_name,t1.*,t2.*,tbl_req_mno_msisdn.*,designations.*,tbl_crimeinfo.*,battalions.*')
                                                                 ->join('users as t1','t1.id=tbl_req_mno_msisdn.completed_by')
-                                                                ->join('users as t2','t2.id=tbl_req_mno_msisdn.requested_by')
+                                                                ->join('users as t2','t2.id=tbl_req_mno_msisdn.requested_for')
                                                                 ->join('battalions', 'battalions.battalions_id=t2.battalions_id')
                                                                 ->join('designations', 'designations.designations_id=t2.designations_id')
                                                                 ->join('tbl_crimeinfo', 'tbl_crimeinfo.id=tbl_req_mno_msisdn.reason_crime_type')

@@ -177,9 +177,15 @@ class SuperRequestProvider extends CI_Controller {
             'completed_by' => $this->session->userdata('user_id')             
         );
         //var_dump($update_request_info);die;
-	$this->request_model->update_request_info($update_request_info, $request_id);        
-        redirect('SuperRequestProvider/new_request_details');
-        
+	$this->request_model->update_request_info($update_request_info, $request_id); 
+
+	$user = $this->request_model->getUserByReqId($request_id);
+		
+	$emailurl= "http://www.jhorotek.com/phpmailer/examples/rialto_req_confirm.php?email=$user->email";
+	$emailurl = str_replace(" ", "+", $emailurl);
+	$emailurl = file_get_contents($emailurl);
+	
+	redirect('SuperRequestProvider/new_request_details');
     }
 	
 	

@@ -178,7 +178,15 @@ class RequestProvider extends CI_Controller {
         );
         //var_dump($update_request_info);die;
 	$this->request_model->update_request_info($update_request_info, $request_id);        
-        redirect('RequestProvider/new_request_details');
+	
+
+	$user = $this->request_model->getUserByReqId($request_id);
+		
+	$emailurl= "http://www.jhorotek.com/phpmailer/examples/rialto_req_confirm.php?email=$user->email";
+	$emailurl = str_replace(" ", "+", $emailurl);
+	$emailurl = file_get_contents($emailurl);
+	
+	redirect('RequestProvider/new_request_details');
         
     }
 	

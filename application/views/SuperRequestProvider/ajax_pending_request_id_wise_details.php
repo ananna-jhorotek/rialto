@@ -6,7 +6,7 @@
                     <div class="box-header">        
                     </div>  
 					
-                    <form action="<?php echo site_url('RequestProvider/updateReq') ?>" id="fileform" class="form-horizontal" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+                    <form action="<?php echo site_url('SuperRequestProvider/updateReq') ?>" id="fileform" class="form-horizontal" enctype="multipart/form-data" method="post" accept-charset="utf-8">
                         <div class="box-body">                        					
                             <div class="row">
                                 <div class="col-lg-6 col-xs-6">

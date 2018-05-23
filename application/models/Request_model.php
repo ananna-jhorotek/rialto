@@ -169,6 +169,35 @@ class Request_model extends CI_Model
     function update_request_info($update_request_info, $request_id){
 		return $this->db->where('request_id',$request_id)->update('tbl_req_mno_msisdn',$update_request_info);
 	}
+	
+	//Retrieving email/username by cd_user_id
+	function getUserByReqId($reqid)
+	{	
+		$this->db->select('tbl_req_mno_msisdn.requested_by');
+
+		$this->db->from('tbl_req_mno_msisdn');		
+		$this->db->where('request_id', $reqid);
+		
+		$result = $this->db->get()->row();
+		
+		$req_by = $result->requested_by;
+		
+		$this->db->select('users.email');
+
+		$this->db->from('users');		
+		$this->db->where('id', $req_by);
+		
+		$users = $this->db->get();
+
+		if( $users->num_rows() > 0 )	
+		{
+			return $users->row();
+		}
+		else
+		{
+			return false;
+		}
+	}
        
 }
 ?>
